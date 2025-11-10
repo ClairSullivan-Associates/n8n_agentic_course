@@ -49,6 +49,7 @@ We are seeking a Principal AI Engineer to architect and lead the development of 
 **Senior AI Engineer - AI Agent Development**
 We are seeking a Senior AI Engineer to design and deploy production AI agents that automate business processes and enhance customer experiences. The ideal candidate has 5-7 years of experience building ML systems, with at least 2 years focused on LLM applications, RAG systems, and agent architectures. You will mentor junior engineers, collaborate with product teams to define AI capabilities, and own the end-to-end development of intelligent automation solutions. This role requires hands-on expertise with modern AI frameworks (LangChain, OpenAI API, vector databases), cloud infrastructure (AWS/Azure/GCP), and a proven track record of deploying at least 3-5 AI agents to production. Experience with agent orchestration tools like n8n and a track record of measurable business impact through AI solutions are essential.
 
+
 # Question 4
 
 Within the course repository are 10 issues that need to be analyzed and routed.  Your task is to create a workflow that will get issues 71 through 80 from the GitHub repository.  Based on the content of the issue, you will need to determine which team each issue should be routed to from the following list:
@@ -66,3 +67,17 @@ You also need to determine based on the content of the issue how much of a prior
 - prioritization
 
 Once you have written your results to a Google Sheet, you will copy and paste the results into the scorer.
+
+
+# Question 5
+
+You have access to the Bill.com v3 API docs in the file `./data/docs/api_docs.txt`.  Create a RAG chatbot based on these documents that will answer the following questions about the v3 API.  You will assume that the user asking these questions is new to the API but understands general API concepts and uses Python.  So for the following set of questions, you will provide the question text to the chatbot and then copy and paste the chatbot's response into the scorer.
+
+### Question 5a
+Your application needs to support payments to vendors in Brazil and Australia. A developer has successfully created vendors in both countries but notices that payments to the Brazilian vendor are failing while Australian payments work fine. What additional configuration is required for Brazilian vendors that isn't needed for Australian vendors, and how would you programmatically determine what fields are needed before creating any international vendor?
+
+### Question 5b
+A finance automation system needs to process payments for 50 bills across 10 different vendors simultaneously. The developer is comparing POST /v3/payments (called 50 times) versus POST /v3/payments/bulk (called once). Explain the critical difference in transaction behavior between these approaches, including what happens if the 45th bill payment fails in each scenario, and which approach would be more appropriate for different business requirements.
+
+### Question 5c
+Your application integrates with BILL API for 200 client organizations, each with an average of 100 API calls per day. During month-end processing, usage spikes to 500 calls per organization per day. Design a proper rate limiting strategy that accounts for BOTH the hourly rate limits (20,000 requests/hour) and concurrent request limits (3 per organization). Include the specific error codes you'd handle, the exponential backoff formula provided in the documentation, and explain why the max_retry value is set to 12 in their example code.
