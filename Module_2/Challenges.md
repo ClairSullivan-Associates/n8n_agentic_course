@@ -4,10 +4,15 @@ There are two major sections to this module's challenges: access the Bill.com v3
 
 # Bill.com v3 API Instructions
 
-You will be provided during class with the credentials to access a Bill Sandbox account that has data preloaded into it.  Using the v3 API and any n8n nodes you need, your task will be to create an agent that answers the following questions.
+You will be provided during class with the credentials to access a Bill Sandbox account that has data preloaded into it.  Using the v3 API and any n8n nodes you need, your task will be to create an agent that answers the following questions.  
 
-**Important Note:**
+There are practically limitless ways you can approach this problem.  For example, you could create one chatbot for each of the following.  Or you could create a single chatbot with different tools to handle and and all of the following.  Or you don't have to create a chatbot at all and just answer each question below through updating the user and system prompts.  It is completely up to you!  However, you are instructed to automate as much of the process as possible.  Your submitted solutions should be ones that were obtained with just a single chat or manual trigger and answer the entire question.
+
+**Important Note**
 You will use the following URL to access the API: `https://gateway.stage.bill.com/connect/v3/login` 
+
+**Hint**
+Be sure to consult the [Bill.com v3 API documentation](https://developer.bill.com/reference/api-reference-overview) for more information on how to access the API and its endpoints.  In particular, you are encouraged to explore pagination for this API.
 
 
 ## Question 1
