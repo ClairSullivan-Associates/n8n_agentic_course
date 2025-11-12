@@ -36,3 +36,25 @@ Create a Google Sheet with complete details on all invoices in the system, inclu
 - Number of days late (assume today's date is 2025-04-10 for this exercise) 
 
 Copy and paste the results of the Google Sheet into the scorer when you are completed.
+
+
+# Data Extraction Instructions
+
+You will be working with the US Securities and Exchange Commission (SEC) API for this section of the module.  The SEC provides a public API that allows users to access filings made by publicly traded companies.  In order to access it, you will need to create a free account and obtain an API key.  You can find more information about the SEC API here: `https://sec-api.io/`.
+
+When working with this API, we will be downloading PDFs from the site.  These follow a particular format.  For example, to access the PDF of the September 30, 2025 Form 10-Q (Quarterly Earnings Report) for Bill Holdings, you will using the following URL:
+
+`https://www.sec.gov/Archives/edgar/data/1786352/000162828025050328/bill-20250930.htm`
+
+Be sure to consult the SEC API documentation for more information on how to access filings and their formats, in particular [this website](https://sec-api.io/docs/sec-filings-render-api) on how to GET PDF files.
+
+You will create a workflow that extracts specific information from these filings based on the questions below.
+
+## Question 6
+
+Create an agent that downloads the Bill Holdings From 10-Q for the quarter ending September 30, 2025.  From this file, extract the following information and write it to a Google Sheet with the following columns:
+
+- Quarter
+- Total assets
+- Net income (loss)
+
