@@ -81,3 +81,7 @@ A finance automation system needs to process payments for 50 bills across 10 dif
 
 ### Question 5c
 Your application integrates with BILL API for 200 client organizations, each with an average of 100 API calls per day. During month-end processing, usage spikes to 500 calls per organization per day. Design a proper rate limiting strategy that accounts for BOTH the hourly rate limits (20,000 requests/hour) and concurrent request limits (3 per organization). Include the specific error codes you'd handle, the exponential backoff formula provided in the documentation, and explain why the max_retry value is set to 12 in their example code.
+
+# Question 6
+
+Create a workflow that will scrape the Bill.com 
