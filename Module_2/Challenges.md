@@ -37,6 +37,7 @@ Create a Google Sheet with complete details on all invoices in the system, inclu
 
 - Vendor Name
 - Vendor ID
+- Invoice number
 - Invoice amount
 - Number of days late (assume today's date is 2025-04-10 for this exercise) 
 
@@ -62,4 +63,8 @@ Create an agent that downloads the Bill Holdings From 10-Q for the quarter endin
 - Quarter
 - Total assets
 - Net income (loss)
+
+# Question 7
+
+From this same file, extract the data for the Company's available-for-sale debt securities, included within short-term investments and funds held for customers, by remaining contractual maturity as of September 30, 2025.
 
