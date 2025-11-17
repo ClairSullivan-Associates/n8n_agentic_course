@@ -58,13 +58,23 @@ You will create a workflow that extracts specific information from these filings
 
 ## Question 6
 
-Create an agent that downloads the Bill Holdings From 10-Q for the quarter ending September 30, 2025.  From this file, extract the following information and write it to a Google Sheet with the following columns:
+Create an agent that downloads the Bill Holdings From 10-Q for the quarter ending September 30, 2025.  From this file, extract the following information:
+
+- State or other jurisdiction of incorporation or organization
+- Address of principal executive offices
+- IRS Employer Identification Number
+
+## Question 7
+
+Utilizing this same agent, extract the following information and write it to a Google Sheet with the following columns:
 
 - Quarter
 - Total assets
 - Net income (loss)
 
-# Question 7
+Also, copy this data into the scorer when you are completed.
 
-From this same file, extract the data for the Company's available-for-sale debt securities, included within short-term investments and funds held for customers, by remaining contractual maturity as of September 30, 2025.
+## Question 8
+
+From this same file, extract the data for the Company's available-for-sale debt securities, included within short-term investments and funds held for customers, by remaining contractual maturity as of September 30, 2025.  Copy and paste that information into the scorer when you are completed.
 
