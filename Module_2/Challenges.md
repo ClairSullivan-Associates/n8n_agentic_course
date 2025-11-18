@@ -56,6 +56,9 @@ Be sure to consult the SEC API documentation for more information on how to acce
 
 You will create a workflow that extracts specific information from these filings based on the questions below.
 
+**Note:**
+This workflow will be used in a later workflow, so you are encouraged to at least attempt to create the workflow, even if you do not answer the questions below.
+
 ## Question 6
 
 Create an agent that downloads the Bill Holdings From 10-Q for the quarter ending September 30, 2025.  From this file, extract the following information:

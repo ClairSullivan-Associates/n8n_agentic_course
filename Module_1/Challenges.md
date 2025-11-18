@@ -52,6 +52,9 @@ We are seeking a Senior AI Engineer to design and deploy production AI agents th
 
 # Question 4
 
+**Note:**
+This workflow will be used in a later workflow, so you are encouraged to at least attempt to create the workflow, even if you do not answer the questions below.
+
 Within the course repository are 10 issues that need to be analyzed and routed.  Your task is to create a workflow that will get issues 71 through 80 from the GitHub repository.  Based on the content of the issue, you will need to determine which team each issue should be routed to from the following list:
 
 - PM (Product Management)
@@ -70,6 +73,9 @@ Once you have written your results to a Google Sheet, you will copy and paste th
 
 
 # Question 5
+
+**Note:**
+This workflow will be used in a later workflow, so you are encouraged to at least attempt to create the workflow, even if you do not answer the questions below.
 
 You have access to the Bill.com v3 API docs in the file `./data/docs/api_docs.txt`.  Create a RAG chatbot based on these documents that will answer the following questions about the v3 API.  You will assume that the user asking these questions is new to the API but understands general API concepts and uses Python.  So for the following set of questions, you will provide the question text to the chatbot and then copy and paste the chatbot's response into the scorer.
 
