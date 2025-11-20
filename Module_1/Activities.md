@@ -6,17 +6,17 @@ In this module we will learn the basics of how to use n8n for basic agentic work
 
 We will begin by creating our first workflow.  From the n8n dashboard, click on your Peronsal workspace.  Then click on "New Workflow" in the upper right corner.  This will open a blank workflow.  
 
-![](./pics/new_workflow.jpg)
+<img src="./pics/new_workflow.jpg" width="600">
 
 The first thing to know is that all n8n workflows start with a trigger node.  This is the node that tells n8n when to start the workflow.  For many workflows, we will use the "Manual Trigger" node.  This allows us to manually start the workflow by clicking a button.  However, our first workflow in this course will be a chatbot, so we want to use a chat trigger.  Click the "+" button in the upper right to open the Nodes Panel.  In the node search bar, type "chat" and select the "Chat Trigger" node.
 
-![](./pics/chat_trigger.jpg)
+<img src="./pics/chat_trigger.jpg" width="600">
 
 At this point we do not need to adjust any of the parameters or settings for this node so we can return back to the canvas.  Observe in the lower left a chat window has been opened.  It isn't connected to anything (yet!) so it won't do anything, but this is where we will interact with our chatbot.
 
 Now we need to connect our chatbot to an AI.  We will be using the n8n AI Agent for this course.  Click the "+" button again to open the Nodes Panel.  In the search bar, type "AI Agent" and select the "AI Agent" node.  This will then open the AI Agent node, where you will see the following:
 
-![](./pics/ai_agent.jpg)
+<img src="./pics/ai_agent.jpg" width="600">
 
 There are a couple of key things to notice for this node.  First, we can see that the source for the prompt (AKA the user message) is "Connected Chat Trigger Node."  In fact, if you return to the canvas, you will see that the chat trigger node has been connected to the AI agent node.  This means that the agent is waiting for input from the chat window.  Later in this workshop we will not be running our agents based on chat but more sophisticated workflows.  But for this exercise, this is what we want.  Next you will see that the prompt (user message) is set to `{{ $json.chatInput }}`.  We will see in just a second that when we enter a message in the chat window, it will be stored in the variable `chatInput`.  This is how the AI agent node knows what the user said.  
 
@@ -24,7 +24,7 @@ Notice that there is a red asterisk below the AI Agent node next to "Chat Model.
 
 **ADD SECTION ABOUT GETTING CREDENTIALS FOR IT HERE**
 
-![](./pics/gemini_chat_model.jpg)
+<img src="./pics/gemini_chat_model.jpg" width="600">
 
 ### Saving Your Work
 
@@ -34,7 +34,7 @@ Note that n8n does not automatically save your work.  So it is important to peri
 
 We are now ready to try it out!  So enter into the chat window "what can you do?"  You should see an output that looks something like this:
 
-![](./pics/first_output.jpg)
+<img src="./pics/first_output.jpg" width="600">
 
 There is a lot going on here, so let's dissect it!  First, right when he hit "Enter/Return" you can see n8n in action in the workflow.  You will see the nodes turn from outlined in gray to outlined in green and receive a green check mark upon completion.  Nodes that are running are visually indicated by a spinning circles over the node.  Hopefully you don't see any nodes turn red, which indicates an error.  Also notice that the workflow tells you how many times each node has run.  In this case, we nee that the chat was received once and the model ran once.
 
@@ -42,7 +42,7 @@ Next, we can see that in the chat window we had returned to us the output of the
 
 Now, let's try to ask it "what did I just ask you?"  If you do that, it will likely just repeat the question back to you, having forgotten that you had asked it what it could do before.  This is because the agent has no memory of past interactions yet.  As you likely have guessed, this is what the "Memory" section of the AI Agent node is for.  Click on the "+" symbol next to "Memory" to add memory to the agent.  For this exercise, select "Simple Memory."  This will allow the agent to remember past interactions in the current session.  When we do that, we will see the following:
 
-![](./pics/simple_memory.jpg)
+<img src="./pics/simple_memory.jpg" width="600">
 
 Notice that the memory node requires the `sessionId` variable that we saw earlier.  This is how the memory node knows which session to pull memory from.  Also notice that there is an entry for content length, which defaults to 5.  We can see that this variable name is green, meaning n8n successfully pulled in a value for this variable (shown just below that text) that it though was viable.  This means that the memory is set to remember up to 5 interactions ago (although you can set it to whatever you want within the memory limitations of the n8n cloud environment).  Now, if you return to the chat window, tell it your name, and then ask it "what is my name?"  You should see that it is now able to remember your name from the prior interaction!  Be sure to click on the memory node so you can see what all is being saved there.
 
@@ -56,9 +56,11 @@ In the previous activity we created a basic chatbot that interacted with us thro
 
 We are going to start with our chatbot from the prior activity.  At this stage, it should look like this:
 
-![](./pics/basic_chatbot.jpg)
+<img src="./pics/basic_chatbot.jpg" width="600">
 
 When you look at this workflow, you might notice that plus sign off to the right of the image.  This implies that it is possible to route the output of the agent somewhere other than just back into chat.  In this activity, we are going to do just that.  Our goal is going to create a basic sentiment classifer where the chat agent will take the user's input and then will attempt to determine whether what they said is happy or unhappy.  We will then route that information to a Google Sheet.
+
+### Changing the System Prompt
 
 For the sake of this activity, let's use the following for our system prompt:
 
@@ -73,15 +75,20 @@ Classify as "happy" if the user seems satisfied, positive, neutral, or content. 
 
 So basically, this is telling the agent to take its response and append `SENTIMENT` to the end of it along with the word `happy` or `unhappy` based on the sentiment of the user's input.  This type of approach makes it very easy for downstream nodes to parse the output and take action based on it.  Give it a try with some happy and unhappy inputs to see how it works.
 
+### Switch Nodes
+
 So next, we want to use some `if/then` logic to say something like "if the sentiment is happy, do this, else do that."  To do this, we will use a "Switch" node.  Click on the plus sign to the right of the AI Agent node to add a new node.  In the Nodes Panel, search for "Switch" and select the "Switch" node.  This will open the Switch node, where you will see the following:
 
-![](./pics/switch.jpg)
+<img src="./pics/switch.jpg" width="600">
 
 We now need to create our routing rules for the switch.  We know we are going to have two of them: one for happy and one for unhappy.  We also know that the output of the AI Agent node, `$json.output`, should contain `SENTIMENT: happy` or `SENTIMENT: unhappy`.  So we can use that to create our rules as we see here:
 
-![](./pics/populated_switch.jpg)
+<img src="./pics/populated_switch.jpg" width="600">
+
 
 Now is a good time to check out that button in the upper right of the node that says "Execute step."  This button allows us to run just this node in isolation, using the output of the prior node as input.  So click that button now to see how the switch is working.  You should see that it successfully routes the output to the correct branch based on the sentiment.  If you gave it a happy input in your last chat, you should see that Output 0 was selected (assuming you used the same order of routing rules as shown above).  If you gave it an unhappy input, you should see that Output 1 was selected.
+
+### Writing Results to Google Sheets
 
 Now let's get those results in real time somewhere that someone could look at them.  We are going to route the results to a Google Sheet for logging purposes.  Start by creating a Google Sheet called "sentiment" with the following columns:
 
@@ -91,19 +98,93 @@ Now let's get those results in real time somewhere that someone could look at th
 
 Next we need to add some Google Sheet nodes to each output of the Swtich node.  Click on Output 0 of the Switch node to add a new node.  In the Nodes Panel, search for "Google Sheets" and select the "Google Sheets" node.  You will notice that you are then asked to select one of several different actions:
 
-![](./pics/google_sheet_actions.jpg)
+<img src="./pics/google_sheet_actions.jpg" width="600">
 
 Here, we are going to add a new line to the sheet every time we get a new chat.  So select "Append Row."  This will open the Google Sheets node.  You will use your Google Sheets account as the credential and select "Sheet Within Document" as the resource.  Your operation is "Append Row."  From here, the node will give you drop downs to start filling out to identify which Google Sheet you are editing and which sheet within the spreadsheet you are appending to (just Sheet 1 for us, unless you named the tab something else).  From here, n8n will attempt to manually map each column, which is very helpful because you can just drag and drop the variables you want into each column.  We will use `$now` as the timestamp (i.e. when the chat was sent) and `output` as the Message.  Notice that you can drag these from the input variables to the node on the left.  Finally, we will use a global value for Sentiment.  Since we are starting with Output 0 of the Switch node, we know that the sentiment is happy.  So we can just type in "happy" for that column.  Your completed node should look something like this:
 
-![](./pics/append_happy.jpg)
+<img src="./pics/append_happy.jpg" width="600">
 
 Now repeat this process for Output 1 of the Switch node, except this time set the Sentiment column to "unhappy."  
 
 At this point, you have two different append row nodes in your workflow.  While this might not be too confusing with only two of them, note that you can rename nodes in n8n to make it easier to identify them.  To do so, click into the node and double click on the name at the top.  Change the names of your two Google Sheets nodes to something unique so you can easily identify them.  Here is what the completed workflow should look like:
 
-![](./pics/sentiment_workflow.jpg)
+<img src="./pics/sentiment_workflow.jpg" width="600">
 
 Save your workflow and give it a try!  Enter some happy and unhappy messages into the chat window and then check your Google Sheet to see if the results were logged correctly.  If everything worked, you should see one row in the sheet for each chat you sent, along with the correct sentiment. 
+
+## Module 1, Activity 3: Creating Your First Agent with Tools
+
+When we talk about agentic AI, we are referring to more than just the chatbots we have created so far.  We are talking about giving the LLM tools to perform more complicated tasks than just taking text and responding with text.  So we are going to do just that in this activity.  We are going to power our AI Agent with a tool that goes beyond just whatever is built into the model itself.  (In reality, for this activity we will be using the Wikipedia tool to create a research agent.  Most of the popular LLMs likely already have Wikipedia included in their training data, so this is just for demonstation purposes.  You will be using more sophisticated tools in the challenges.)
+
+For this activity, we are going to create a workflow that will read a list of topics from a Google Sheet.  Then, the AI Agent will use a tool (Wikipedia) to research that that topic and write a short blog post about it.  That blog post will then be written back to the Google Sheet.
+
+### Non-Chat Triggers
+
+All n8n workflows begin with a trigger.  Up until this point that trigger has been the user entering information via the chat prompt.  However, there are several different ways you can trigger your workflow.  Let's start by creating a new workflow and click "Add first step..."  This will show you all of the different types of triggers you can use, as shown below:
+
+<img src="./pics/triggers.jpg" width="600">
+
+Some common triggers are scheduled triggers (similar to a cron job) or webhooks (beyond the scope of this course).  Let's choose "Trigger manually" for this workflow, which is a great option for testing workflows if you are not using a chat interface.
+
+### Getting the Topics from Google Sheets
+
+We want to create a new Google Sheet that we will read.  You can name it whatever you like, but give it the following columns:
+
+- topic
+- blog post
+
+Next, we want to give it a few different topics to research, one per row.  I used Ada Lovelace, Apple Computers, and Barack Obama, but you can use whatever topics you like.  
+
+We now want to read the rows from this Google Sheet by creating a Google Sheet node with the action "Get row(s) in sheet.  As before, you will authenticate using your Google Sheets account and connect to the correct document that you just created (it is likely at the very top of the list since you just accessed it).  Here is what the node parameters looked like in my case:
+
+<img src="./pics/get_rows_blog_topics.jpg" width="600">
+
+If you execute this step, either by clicking on the "Execute step" button on the node or by returning to the full workflow and clicking the "Play" icon above the node, you will see that 3 items are returned by that node (or the number of topics you created in your sheet).  
+
+### Setting Up the Agent
+
+We now are going to connect the output of that node to our AI Agent node, as before.  However, there are some things that will be a bit different.  Let's see what this looks like:
+
+<img src="./pics/agent_lovelace_example.jpg" width="600">
+
+The first thing you might notice is that we have had to change the Source for Prompt (user message).  In our previous activities we had this set to "Connected Chat Trigger Node" since we were taking chat input from the user.  However, this is no longer the case.  So we change this value to "Define below," indicating that there is something more going on here than just chat.  
+
+Next, you can see that we have brought the information we care about into the prompt.  Here is what the full prompt says:
+
+```
+You are a blog post writer. Write a blog post about {{ $json.topic }}
+
+When given a topic, use the Wikipedia tool to research it, then write a concise blog post (200-300 words) in markdown format.
+
+The blog post should:
+- Have a catchy title (using # heading)
+- Include an introduction
+- Cover key points from Wikipedia
+- Be engaging and informative
+- Use proper markdown formatting
+```
+
+So in this case the agent is getting the data in the `topic` column from the Google Sheet node and taking action on it based on what is in the prompt.  The agent should loop through each of these topics (since it already knows that there are 3 of them) and generate the blog post for each as described in the prompt.  However, we now want to give it a tool so do that research on each topic.
+
+### Adding Tools
+
+In this activity we will use the Wikipedia tool.  If you click on the "+" below "Tool" on the agent, you will be presented with an extensive list of available tools.  I recommend you scroll through them and see just how many there are!  In fact, you will notice that there are some tools, like Google Sheets, that we have already seen existing as nodes as well!  You should think carefully about when you give your agent access to tools versus using those same things as nodes.  In general, tool use is optional and an agent can have access to several tools.  If you know for certain you want a particular thing to happen in a workflow (such as you know you will always read from and write to Google Sheets), you should use the nodes rather than tools.  What we are about to create is just for demonstration purposes.
+
+Search the tools for the Wikipedia tool, add it to your agent, and run it.  You should see the Wikipedia tool used 3 times (or the number of topics you have in your spreadsheet).  You will also notice that the LLM is called twice as many times (6, in this case).  This is because the topic comes into the model and the LLM has to understand what to do with it.  It then routes the topic to Wikipedia and takes the result back to generate the blog post.  Hence, it is accessing the LLM twice.
+
+It is important to note that the agent knew to access the Wikipedia tool because we told it to do so in the prompt.  However, as you will see shortly, we will eventually need to add tool descriptions to inform the agent what the tool does so it knows which tool to use for the job.  
+
+### Outputting the Results
+
+We now want to write these results back to the sheet.  In this case, we will again create a Google Sheet node, but now we want to just update the rows, not append them.  So choose the approprate action and add the node to the output of the AI Agent.
+
+There are a few things we will need to tell this node beyond what we have used so far.  First, the node needs to know which column to match on.  You can choose either the `topic` or the `row_number`.  I would recommend using `row_number` since you know this value will be unique.  (Think about what might happen if you had two identical topics in your list!)  Next, you will need to tell it what to write to the sheet, as before.  When you have this properly configured, it should look like this:
+
+<img src="./pics/ada_update_row.jpg" width="600">
+
+Save and execute your complete workflow and then return to your Google Sheet to make sure it output the blog post to the spreadsheet.  And then try running it again and watch what happens in your Google Sheet.  So just be careful that if you like what the agent generated, you want to make sure you don't overwrite it!
+
+## Some Final Notes: 80% of Workflows Rely on 6 Common Nodes
 
 
 
