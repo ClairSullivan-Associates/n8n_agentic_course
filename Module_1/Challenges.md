@@ -77,7 +77,7 @@ Once you have written your results to a Google Sheet, you will copy and paste th
 **Note:**
 This workflow will be used in a later workflow, so you are encouraged to at least attempt to create the workflow, even if you do not answer the questions below.
 
-You have access to the Bill.com v3 API docs in the file `./data/docs/api_docs.txt`.  Create a RAG chatbot based on these documents that will answer the following questions about the v3 API.  You will assume that the user asking these questions is new to the API but understands general API concepts and uses Python.  So for the following set of questions, you will provide the question text to the chatbot and then copy and paste the chatbot's response into the scorer.
+You have access to the Bill.com v3 API docs in the file `./data/docs/api_docs.txt`.  Create a RAG chatbot based on these documents that will answer the following questions about the v3 API.  You will assume that the user asking these questions is new to the API but understands general API concepts and uses Python.  So for the following set of questions, you will provide the question text to the chatbot and then copy and paste the chatbot's response into the scorer.  Please use the Google Gemini embeddings and LLM for these challenges.
 
 ### Question 5a
 Your application needs to support payments to vendors in Brazil and Australia. A developer has successfully created vendors in both countries but notices that payments to the Brazilian vendor are failing while Australian payments work fine. What additional configuration is required for Brazilian vendors that isn't needed for Australian vendors, and how would you programmatically determine what fields are needed before creating any international vendor?

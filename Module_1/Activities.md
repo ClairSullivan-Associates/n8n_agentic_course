@@ -16,15 +16,29 @@ At this point we do not need to adjust any of the parameters or settings for thi
 
 Now we need to connect our chatbot to an AI.  We will be using the n8n AI Agent for this course.  Click the "+" button again to open the Nodes Panel.  In the search bar, type "AI Agent" and select the "AI Agent" node.  This will then open the AI Agent node, where you will see the following:
 
-<img src="./pics/ai_agent.jpg" width="600">
+<img src="./pics/ai_agent.jpg" width="300">
 
 There are a couple of key things to notice for this node.  First, we can see that the source for the prompt (AKA the user message) is "Connected Chat Trigger Node."  In fact, if you return to the canvas, you will see that the chat trigger node has been connected to the AI agent node.  This means that the agent is waiting for input from the chat window.  Later in this workshop we will not be running our agents based on chat but more sophisticated workflows.  But for this exercise, this is what we want.  Next you will see that the prompt (user message) is set to `{{ $json.chatInput }}`.  We will see in just a second that when we enter a message in the chat window, it will be stored in the variable `chatInput`.  This is how the AI agent node knows what the user said.  
 
 Notice that there is a red asterisk below the AI Agent node next to "Chat Model."  This indicates that this is a required field.  ("Memory" and "Tool" are not required and we will discuss them shortly.)  This means that we need to hook our agent up to a large language model (LLM) to power our chat.  If you click on the "+" symbol there you will see a variety of options for chat models.  In this course, we will largely work with the Google Gemini Chat Model.  So select that model, which will bring up the following screen:
 
-**ADD SECTION ABOUT GETTING CREDENTIALS FOR IT HERE**
+### Working with and Adding Credentials
 
-<img src="./pics/gemini_chat_model.jpg" width="600">
+Credentials are stored in a separate location within n8n.  In order to find them, you will go to your n8n launch page and select "Credentials," as shown here:
+
+<img src="./pics/cred1.jpg" width="600">
+
+From here, you will have a series of pre-staged, shared credentials, including that for Google Gemini.  You will select this credential for the agent in this activity.  
+
+However, let's say we want to create a credential for Google Sheets, which you will need to do a bit later in this module.  If you click on the drop down for "Create Workflow" in the upper right, you will see the option to "Create Credential."  
+
+<img src="./pics/cred2.jpg" width="600">
+
+From here you can search among the many available apps and services to create the credential.  In this case, let's pick "Google Sheets OAuth2 API."
+
+<img src="./pics/cred3.jpg" width="300">
+
+You will then authenticate to your Google account via OAuth, which will then automatically populate the remainder of what you need for this credential to be used in n8n.
 
 ### Saving Your Work
 
@@ -79,11 +93,11 @@ So basically, this is telling the agent to take its response and append `SENTIME
 
 So next, we want to use some `if/then` logic to say something like "if the sentiment is happy, do this, else do that."  To do this, we will use a "Switch" node.  Click on the plus sign to the right of the AI Agent node to add a new node.  In the Nodes Panel, search for "Switch" and select the "Switch" node.  This will open the Switch node, where you will see the following:
 
-<img src="./pics/switch.jpg" width="600">
+<img src="./pics/switch.jpg" width="300">
 
 We now need to create our routing rules for the switch.  We know we are going to have two of them: one for happy and one for unhappy.  We also know that the output of the AI Agent node, `$json.output`, should contain `SENTIMENT: happy` or `SENTIMENT: unhappy`.  So we can use that to create our rules as we see here:
 
-<img src="./pics/populated_switch.jpg" width="600">
+<img src="./pics/populated_switch.jpg" width="300">
 
 
 Now is a good time to check out that button in the upper right of the node that says "Execute step."  This button allows us to run just this node in isolation, using the output of the prior node as input.  So click that button now to see how the switch is working.  You should see that it successfully routes the output to the correct branch based on the sentiment.  If you gave it a happy input in your last chat, you should see that Output 0 was selected (assuming you used the same order of routing rules as shown above).  If you gave it an unhappy input, you should see that Output 1 was selected.
@@ -98,7 +112,7 @@ Now let's get those results in real time somewhere that someone could look at th
 
 Next we need to add some Google Sheet nodes to each output of the Swtich node.  Click on Output 0 of the Switch node to add a new node.  In the Nodes Panel, search for "Google Sheets" and select the "Google Sheets" node.  You will notice that you are then asked to select one of several different actions:
 
-<img src="./pics/google_sheet_actions.jpg" width="600">
+<img src="./pics/google_sheet_actions.jpg" width="300">
 
 Here, we are going to add a new line to the sheet every time we get a new chat.  So select "Append Row."  This will open the Google Sheets node.  You will use your Google Sheets account as the credential and select "Sheet Within Document" as the resource.  Your operation is "Append Row."  From here, the node will give you drop downs to start filling out to identify which Google Sheet you are editing and which sheet within the spreadsheet you are appending to (just Sheet 1 for us, unless you named the tab something else).  From here, n8n will attempt to manually map each column, which is very helpful because you can just drag and drop the variables you want into each column.  We will use `$now` as the timestamp (i.e. when the chat was sent) and `output` as the Message.  Notice that you can drag these from the input variables to the node on the left.  Finally, we will use a global value for Sentiment.  Since we are starting with Output 0 of the Switch node, we know that the sentiment is happy.  So we can just type in "happy" for that column.  Your completed node should look something like this:
 
@@ -122,7 +136,7 @@ For this activity, we are going to create a workflow that will read a list of to
 
 All n8n workflows begin with a trigger.  Up until this point that trigger has been the user entering information via the chat prompt.  However, there are several different ways you can trigger your workflow.  Let's start by creating a new workflow and click "Add first step..."  This will show you all of the different types of triggers you can use, as shown below:
 
-<img src="./pics/triggers.jpg" width="600">
+<img src="./pics/triggers.jpg" width="300">
 
 Some common triggers are scheduled triggers (similar to a cron job) or webhooks (beyond the scope of this course).  Let's choose "Trigger manually" for this workflow, which is a great option for testing workflows if you are not using a chat interface.
 
@@ -137,7 +151,7 @@ Next, we want to give it a few different topics to research, one per row.  I use
 
 We now want to read the rows from this Google Sheet by creating a Google Sheet node with the action "Get row(s) in sheet.  As before, you will authenticate using your Google Sheets account and connect to the correct document that you just created (it is likely at the very top of the list since you just accessed it).  Here is what the node parameters looked like in my case:
 
-<img src="./pics/get_rows_blog_topics.jpg" width="600">
+<img src="./pics/get_rows_blog_topics.jpg" width="300">
 
 If you execute this step, either by clicking on the "Execute step" button on the node or by returning to the full workflow and clicking the "Play" icon above the node, you will see that 3 items are returned by that node (or the number of topics you created in your sheet).  
 
@@ -184,11 +198,61 @@ There are a few things we will need to tell this node beyond what we have used s
 
 Save and execute your complete workflow and then return to your Google Sheet to make sure it output the blog post to the spreadsheet.  And then try running it again and watch what happens in your Google Sheet.  So just be careful that if you like what the agent generated, you want to make sure you don't overwrite it!
 
-## Some Final Notes: 80% of Workflows Rely on 6 Common Nodes
+## Module 1, Activity 4: Retrieval-Augmented Generation (RAG)
 
+As described in lecture, RAG is useful when we want to provide our LLM with a lot of information, typically from text, stored as vectors in a database.  In order to do this, we need to provide n8n with the documents to be vectorized, use an LLM to perform the vectorization, and then make that vector database available to a chatbot or other agent.
 
+### n8n Templates
 
+n8n has a large user community that have contributed thousands of templates for a whole host of tasks.  In order to find the templates, go to [https://n8n.io/workflows/](https://n8n.io/workflows/).  These can be directly imported into your n8n cloud workspace or copied as JSON (how all n8n workflows are represented) and then imported that way.
 
+We will be experimenting in this activity with one of those templates.  Search the above webpage for ["RAG Starter Template"](https://n8n.io/workflows/5010-rag-starter-template-using-simple-vector-stores-form-trigger-and-openai/), which will give you a templated called "RAG Starter Template using Simple Vector Stores, Form trigger and OpenAI."  Click "Use for free" and then import it to your n8n cloud environment.  It should look like this:
+
+<img src="./pics/rag_template.jpg" width="600">
+
+Note that this particular template uses OpenAI embeddings while we have been primarily using Google Gemini.  This is OK.  Click on that node and you will see that you can can claim 100 free OpenAI API credits.  
+
+### Exploring the RAG Chatbot
+
+Let's talk sequentially through what this workflow does before we run it.  First, it is important to realize that there are actually _two_ workflows here.  The first one is labelled here "Load Data Flow."  What it does is take a document, vectorize it, and store it in a vector store.  The main node that does this, called "Insert Data to Store," is a node type called "Simple Vector Store."  Notice that this node type requires both an LLM embedding model (Embeddings OpenAI, in this case), and a document (provided via the Default Data Loader).  
+
+The second workflow is called "Retriever Flow."  Here, we have a second trigger, our usual chat trigger, that is the input to the actual AI Agent.  The agent then uses the Simple Vector Store node called "Query Data Tool" as a tool to the agent to query those vectors created in the first workflow.  Let's actually look at that tool:
+
+<img src="./pics/query_data_tool.jpg" width="300">
+
+Notice that there is a tool description here that says "Use this knowledge base to answer questions from the user."  This is telling the agent how to use the tool.  (Recall that we did this in the prompt in the Wikipedia example, but it is more robust to add tool descriptions for all of your tools.)  In this case, this tool reads the embeddings of the simple vector store, identifies which chunks of text are most relevant to the user's chat message, and uses that with the LLM to generate a response.
+
+### Running the RAG Worfklow
+
+The first thing we need to do is to upload a file.  If you click on the lightning bolt next to the "Upload your file here" node, this will kick of this first workflow.  In doing so, you will be presented with a window to upload your file.  For this, you will upload the file in this `data/docs/` directory of this repository, which is called `Bill-q2-2025-10-q.pdf`, which is the SEC quarterly filing for Bill Holdings for the 2nd quarter of 2025.  
+
+**Note:** If you get an error when you try to submit this form, save your workflow and try again.
+
+Once it is done running this portion of the workflow, you can see which parts actually ran by observing what turned green.  
+
+Now we can try asking questions of it using the second portion of the worklow, the Retriever Flow.  In the chat window, try asking "What company is described in this Form 10-Q?"  Go through the actual PDF file and find some other questions that you can ask of this chatbot.
+
+## Some Final Notes: 80% of Workflows Rely on a Handful of Common Nodes
+
+We have seen some very basic node usage in this module.  However, it is good to be aware of some of the most useful nodes.  It turns out that 80% of workflows use these nodes at some point:
+
+- Logic nodes/splitting: 
+  - [IF](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.if/): route workflows based on true/false conditions
+  - [Switch](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.switch/): route workflows (potentially with multiple conditions) based on specific values
+
+- Merge nodes/combining data sources:
+  - [Merge](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.merge/): combine data from multiple streams, once data of all streams is available
+  - [Aggregate](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.aggregate/): take separate items, or portions of them, and group them together into individual items
+
+- Connectivity:
+  - [HTTP Request](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.httprequest/): query data via REST API calls (to be discussed in Module 2)
+  - [Webhook](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.webhook/): receive data from apps when an event occurs (beyond the scope of this course)
+
+- [Code node](https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-base.code/): write custom JavaScript or Python and run it as a step in the workflow
+
+## Conclusion
+
+You have now successfully completed all activities of this first module!  You are now ready to begin solving the graded challenge problems located in `./Module_1/Challenges.md`.
 
 
 

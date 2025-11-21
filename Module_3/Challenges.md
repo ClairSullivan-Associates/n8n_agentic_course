@@ -17,7 +17,7 @@ Be sure you report your accuracy scores as the average accuracy, reported as a p
 
 # Question 1
 
-Take the workflow that you used in Module 1 Question 4 (the GitHub issues routing workflow).  Manually review the issues and come up with your own identification of which team they should be routed to.  These issue texts and your manual labels can then be used in your scorer.  Follow the above sequence to create a complete evaluation and report on its results.
+Take the workflow that you used in Module 1 Question 4 (the GitHub issues routing workflow).  Manually review the issues and come up with your own identification of which team they should be routed to.  These issue texts and your manual labels can then be used in your scorer.  You are also welcome to create more sample issues for testing with in your dataset.  Follow the above sequence to create a complete evaluation and report on its results.
 
 # Question 2
 
