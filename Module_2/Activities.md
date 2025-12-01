@@ -6,7 +6,11 @@ In this module we will work more with tools and agentic workflows, bringing in t
 
 We will begin with a trivial workflow that is designed to send a GET request to a REST API endpoint.  This particular endpoint will require no authentication or credentials and just return a basic JSON payload.
 
-So let's start with a manual trigger and add to it an "HTTP Request" node, which will bring up the following screen:
+So let's start with a manual trigger and add to it an "HTTP Request" node, as shown in this workflow:
+
+<img src="./pics/cat_facts.jpg" width="300">
+
+When you add the HTTP Request node, n8n will bring up the following screen:
 
 <img src="./pics/http_request_blank.jpg" width="300">
 
@@ -26,7 +30,7 @@ Congratulations!  You have just made your first API request from n8n!
 
 ## Module 2, Activity 2: HTTP Requests as a Tool
 
-Now we are going to make this a little more complicated.  We are now going to create a weather chatbot that will use HTTP Request as a tool rather than a separate node.  For this activity, you will need to create an API key from Visual Crossing as described in the onboarding document.
+Now we are going to make this a little more complicated.  We are going to create a weather chatbot that will use the HTTP Request as a tool rather than a separate node.  For this activity, you will need to create an API key from Visual Crossing as described in the onboarding document.
 
 ### Create The Workflow
 
