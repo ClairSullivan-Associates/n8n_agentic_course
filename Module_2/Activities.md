@@ -54,7 +54,7 @@ Let's start at the top of the tool, as shown here:
 
 <img src="./pics/top_http_req.jpg" width="600">
 
-Notice that we start with a tool description, which tells the agent what this particular tool does.  Keep these descriptive but concise.  Next, we see that we are using the GET method.  After that, we pass it a URL.  This is where things get a little complicated.  We need to get the location from the agent.  If we look at the input panel on the left in the "From AI" section, we can see that the agent populated a variable called "location."  It is used to populate the URL.  However, there is a bit of code being used here to do so, namely:
+Notice that we start with a tool description, which tells the agent what this particular tool does.  Keep these descriptive but concise.  Next, we see that we are using the GET method.  After that, we pass it a URL.  This is where things get a little complicated.  We need to get the location from the agent.  If we were to run the bot and look at the input panel on the left in the "From AI" section, we can see that the agent populated a variable called "location."  It is used to populate the URL.  However, there is a bit of code being used here to do so, namely:
 
 ```
 {{ $fromAI('location', 'The location to get weather for (e.g., Breckenridge,CO)', 'string') }}
@@ -78,7 +78,7 @@ From here, the `?` indicates that query parameters are now coming.  `&` signals 
 
 So let's scroll down in that node to see what else we can configure.  Here is what we see:
 
-<img src="./pics/bottom_http_req.jpg" width="600">
+<img src="./pics/bottom_http_req.jpg" width="300">
 
 First, we have authentication set to none.  In general, it is best practice to save authentication information in credentials.  However, in this simple case we can see from the URL that the `key` is passed as a query example, so we will start with this approach.  We turn on "Send Query Parameters" and then set each of them by their name and value.  
 
@@ -100,8 +100,77 @@ Next, select "Query Auth" from the dropdown:
 
 Then, it will ask you to select which Query Auth you would like to choose, which lists any available from your credentials.  We will be creating a new one, so select "Create new credential."  Here you will get the following screen:
 
-<img src="./pics/query_auth3.jpg" width="300">
+<img src="./pics/query_auth3.jpg" width="600">
 
 Be sure to give this credential a unique name ("Weather Query Auth" in this case).  Then, we know it wants the query parameter called `key` and we copy the actual value of that key into the box.  Then hit save, which saves it to your credentials, allowing you to use it for all future workflows.
 
 Wire this new tool into your workflow and confirm it works as before.
+
+## Module 2, Activity 3: HTTP Requests with More Sophisticated Authentication
+
+In this activity we will create a more sophisticated agents that uses both POST and GET requests to query some staged data in a Bill.com Sandbox account with the v3 API, all from within n8n.  While what we will show in this activity is just how to authenticate and get some very basic information from the Sandbox, you will build off of this activity in the challenge problems for this module to do more sophisiticated things.
+
+### Understanding how Bill's API Authentication Works
+
+As you will discover in this activity, there are two key steps in getting information from a Bill.com Sandbox.  First, you need to authenticate via a POST request to get a `sessionId`.  Then, you use that ID in the header of all subsequent GET requests to get information from the API.  This means that you will have to use two different HTTP Request nodes in your workflow since a single HTTP Request node can only be configured for one type of request at a time.
+
+### POST Request for Authentication
+
+Lets start by creating a new workflow with a Manual Trigger and an HTTP Request node.  Connect the two nodes together.  This will bring up the configuration screen for the HTTP Request node.  We will set the method for this node to POST since we are authenticating.  Next, we need to set the URL to the authentication endpoint for Bill.com's v3 API, which is `https://gateway.stage.bill.com/connect/v3/login`.  
+
+We now need to provide our authentication information.  Since Bill.com does not have a built-in credential type in n8n, we will use the "Generic Credential Type."  It is important to note that there are 4 keys that we must provide values for in order to authenticate, namely `username`, `password`, `organizationId`, and `devKey`.  The values for these will be provided to you in class.  However, if you look through each of the generic auth types, there isn't one that will allow you to provide that many key-value pairs.  Therefore, we will be creating a "Custom Auth" type of credential by selecting that from the "Generic Auth Type" dropdown.  Next, select "Create new credential" from the "Custom Auth" dropdown.  This will bring up the following screen:
+
+<img src="./pics/custom_auth1.jpg" width="300">
+
+Here, we will populate the JSON field with the key-value pairs needed.  At this point, you are strongly encouraged to consulte the [Custom Auth documentation](https://docs.n8n.io/integrations/builtin/credentials/httprequest/#using-custom-auth) to see what format to use for this.  You will note that the "Body" type authentication is what we will be using since the v3 API expects the authentication information to be passed in the body of the POST request.  In particular, we observe that since we re passing these values as JSON in the body, we need a key called `body` and then provide JSON with the key-value pairs needed for authentication.  Here is what the JSON should look like once you have populated it with your own values:
+
+```json
+{
+  "body": {
+    "username": "sullivanclair099@gmail.com",
+    "password": "...provided in class...",
+    "organizationId": "...provided in class...",
+    "devKey": "...provided in class..."
+  }
+}
+```
+
+Once we have created this credential, we send it in the body of the HTTP request by selecting that option and specifying that the body content type is JSON, as shown here:
+
+<img src="./pics/custom_auth2.jpg" width="300">
+
+(We don't have any additional body parameters that we are manually sending at this point, so we can leave those blank.)  If you click the red "Execute step" button, you should see a successful authentication response that includes a `sessionId`.  The `sessionId` does expire after a few minutes, so you might find yourself having to manually execute this node from time to time as you work through the rest of this activity.
+
+We now will connect this node to an AI Agent node (don't forget to set "Source for Prmopt" as "Define below" since we are not creating a chatbot at this time) with Google Gemini as the chat model, like before.  You can use the following prompt for the user message for this activity:
+
+```
+Analyze the following vendor data and provide a summary.
+
+Please provide in markdown format:
+
+- Total number of vendors
+- A listing of all vendor names, email addresses, and phone numbers
+- The balance for each vendor
+```
+
+### GET Request for Vendor Data
+
+We now need to give the agent access to the Sandbox as a tool to do its work.  So we will create another HTTP Request node and connect it as a tool to the agent.  This time, we will set the method to GET since we are retrieving data.  The URL for getting vendor data from the v3 API is `https://gateway.stage.bill.com/connect/v3/vendors` since we are retrieving vendor data.  You can use the following for the tool description:
+
+```
+Makes an HTTP request to the Bill API to get vendor information and returns the response data
+```
+
+The URL for vendor GET requests is `https://gateway.stage.bill.com/connect/v3/vendors`.
+
+Remember in the previous login step we sent the authenthication in the body? The vendor GET request expects something different.  It expects the `sessionId` and `devKey` key-value pairs to be in the header.  We could just hardcode the information in as a header parameter, but a better option is to create a header credential that we can reuse.  So select "Generic Credential Type" from the "Authentication" dropdown and then "Header Auth" from the "Generic Auth Type" dropdown.  Next, select "Create new credential" from the "Header Auth" dropdown.  For this, you will set the Name to `devKey` and the Value to the devKey provided in class. 
+
+As for `sessionId`, we cannot set it this way since it is dynamically created.  So we do need to manually provide it in the node as a header parameter.  However, rememver that it was determined earlier in the workflow by the first HTTP request node.  So we can use the value `{{ $json.sessionId }}` (just drag it from the input variable list on the left panel) to bring it in.  So you configuration for this HTTP Request tool should look like this:
+
+<img src="./pics/custom_auth2.jpg" width="400">
+
+and your complete workflow should look like this:
+
+<img src="./pics/bill_api_workflow.jpg" width="600">
+
+If you execute this workflow, you should get the output in the lower right panel showing the vendor data in this Sandbox.  
