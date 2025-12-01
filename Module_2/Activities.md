@@ -1,4 +1,4 @@
-# Module 2 Activities: Agentic Patterns and Custom API Integration
+# Module 2 Activities: Agentic Patterns, Custom API Integration, and Extraction
 
 In this module we will work more with tools and agentic workflows, bringing in the very power HTTP Request node for making calls to REST APIs.
 
@@ -174,3 +174,8 @@ and your complete workflow should look like this:
 <img src="./pics/bill_api_workflow.jpg" width="600">
 
 If you execute this workflow, you should get the output in the lower right panel showing the vendor data in this Sandbox.  
+
+## Module 2, Activity 4a: Using the HTTP Request for Extraction
+
+## Module 2, Activity 4b: Extraction of PDF files
+
