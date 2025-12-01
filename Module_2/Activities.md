@@ -120,7 +120,7 @@ Lets start by creating a new workflow with a Manual Trigger and an HTTP Request 
 
 We now need to provide our authentication information.  Since Bill.com does not have a built-in credential type in n8n, we will use the "Generic Credential Type."  It is important to note that there are 4 keys that we must provide values for in order to authenticate, namely `username`, `password`, `organizationId`, and `devKey`.  The values for these will be provided to you in class.  However, if you look through each of the generic auth types, there isn't one that will allow you to provide that many key-value pairs.  Therefore, we will be creating a "Custom Auth" type of credential by selecting that from the "Generic Auth Type" dropdown.  Next, select "Create new credential" from the "Custom Auth" dropdown.  This will bring up the following screen:
 
-<img src="./pics/custom_auth1.jpg" width="400">
+<img src="./pics/custom_auth1.jpg" width="600">
 
 Here, we will populate the JSON field with the key-value pairs needed.  At this point, you are strongly encouraged to consulte the [Custom Auth documentation](https://docs.n8n.io/integrations/builtin/credentials/httprequest/#using-custom-auth) to see what format to use for this.  You will note that the "Body" type authentication is what we will be using since the v3 API expects the authentication information to be passed in the body of the POST request.  In particular, we observe that since we re passing these values as JSON in the body, we need a key called `body` and then provide JSON with the key-value pairs needed for authentication.  Here is what the JSON should look like once you have populated it with your own values:
 
