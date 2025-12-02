@@ -132,10 +132,14 @@ Because we are using a POST request we know we need to send a JSON body with the
 
 Once you execute this node, you will see a series of unique identifiers returned, one for each of the 8 question-answer pairs that were logged to Braintrust.
 
+So now we have a complete workflow that takes question-answer pairs from Braintrust, has our AI agent answer the questions, and then logs the results back to Braintrust for evaluation.  Here is what the complete workflow looks like:
+
+<img src="./pics/full_workflow.jpg" width="600">
+
 ### Examining the Results in Braintrust
 
 Now that we have logged our experiment results to Braintrust, let's go back to the Braintrust dashboard and see how our AI agent performed.  Go to the Experiments tab and you should see the experiment you created earlier, likely labeled as "LATEST."  Click on it to see the details.  Here is what mine looked like:
 
-<img src="./pics/bt_logged_experiment.jpg" width="600">
+<img src="./pics/bt_logged_exp.jpg" width="600">
 
 So we can see what the input question was (`Input`), what the output of the agent was (`Output`), and what the expected answer was (`Expected`).  Congratulations!  You have successfully logged your first experiment to Braintrust from n8n!
