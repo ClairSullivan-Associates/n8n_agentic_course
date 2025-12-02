@@ -175,7 +175,33 @@ and your complete workflow should look like this:
 
 If you execute this workflow, you should get the output in the lower right panel showing the vendor data in this Sandbox.  
 
-## Module 2, Activity 4a: Using the HTTP Request for Extraction
+## Module 2, Activity 4a: Extraction of PDF files
 
-## Module 2, Activity 4b: Extraction of PDF files
+We are now going to change gears a bit to a common use case for agentic workflows, namely extraction of data from documents.  In this activity, we will extract text from a PDF file using n8n's "Extract from File" node.
+
+We will get started with a different type of trigger than we have been using so far.  Instead of using a manual or chat trigger, we will use "On form submission."  This trigger allows the user to upload a file via a new browser window.  We will set this up as shown below:
+
+<img src="./pics/form_submission.jpg" width="300">
+
+We can see here that we are set up to accept only PDF files in this form, but you can change this to be a comma-separated list of file types if you want to accept more than just PDFs.  Also note that the output field, based on what is set here, will be called `Upload_PDF_file` (note the underscore in place of spaces).  You will need this information for the next node.
+
+Next, we are going to connect this to an "Extract from File" node.  This node is very powerful and can extract text from a variety of file types, including PDFs, HTML, CSV, JSON, and more.  We will select "Extract from PDF" as our operation and the input binary field is set to the file that was uploaded in the previous step, namely `Upload_PDF_file`.  Here is what the configuration looks like:
+
+<img src="./pics/extract_from_file.jpg" width="300">
+
+We then will connect the output of this node to our AI agent (with Google Gemini as the chat model) to analyze the extracted text.  Here is the prompt we will use for this activity:
+
+```
+Summarize the following resume:
+
+ {{ $json.text }}
+ ```
+
+In other words, the output of the "Extract from File" node was ``$json.text``, which we are passing to the agent for analysis by directly placing it into the prompt.  You completed workflow should look like this:
+
+<img src="./pics/pdf_extraction_workflow.jpg" width="600">
+
+Let's now run this workflow.  For the purposes of this activity, we will be using the PDF file called `emily_zhang_resume.pdf` in this repository located in `/docs/resumes/`.  Hopefully, you get a nice summary of Emily's resume from the agent!
+
+## Module 2, Activity 4b: Using the HTTP Request for Extraction
 
