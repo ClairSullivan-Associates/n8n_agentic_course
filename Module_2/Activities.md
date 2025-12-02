@@ -205,3 +205,31 @@ Let's now run this workflow.  For the purposes of this activity, we will be usin
 
 ## Module 2, Activity 4b: Using the HTTP Request for Extraction
 
+Now we are going to see some of the power behind extraction when combined with HTTP Requests.  In this activity, we will extract text from a webpage for analysis.  We will begin with a manual trigger connected to an HTTP Request node.  We will use the GET method to retrieve the contents of a Bill press release with information on a quarterly earnings report: [`https://www.bill.com/press-release/bill-reports-first-quarter-fiscal-year-2026-financial-results`](https://www.bill.com/press-release/bill-reports-first-quarter-fiscal-year-2026-financial-results).  This GET request requires no authentication.  We also want to make sure that we are saving getting the response in text format by selecting Options and Response at the bottom of the node configuration.  We then save the response to the output variable called `data`.  Here is what the configuration looks like:
+
+<img src="./pics/html_scraping.jpg" width="300">
+
+You will notice if you execute this step that what you get back in the variable `data` is the full HTML of the webpage, represented as a string.  This is not particularly useful and we will need to parse it a bit.  For this, you will want to add a node after the HTTP Request called "HTML."  If you click the "+" button after the HTTP Request and search for HTML, it will likely be the very first option.  This will present you with a few types of HTML nodes.  The one we want is "Extract HTML Content."  
+
+HTML parsing can be finicky, and the more information you can provide n8n on the structure of this HTML, the better.  If you were to take that whole string and copy it into your favorite LLM like Gemini Enterprise or ChatGPT and ask it to extract the actual text content from the HTML, you would find that the CSS Selector corresponding to the actual meat of the press release is located in `.text-rich-text`.  We will save that into a variable called `website_text`.  Here is what the configuration looks like:
+
+<img src="./pics/html_parsing.jpg" width="400">
+
+If you were to execute this step now, you would see the actual website text extracted from the HTML.
+
+Finally, we will connect this to an AI Agent node (with Google Gemini as the chat model) to analyze the extracted text.  Here is the prompt we will use for this activity:
+
+```
+Give me a summary of  {{ $json.website_text }}
+```
+
+(noting that the output of the "HTML" node was ``$json.website_text``, which we are passing to the agent for analysis by directly placing it into the prompt.)  You completed workflow should look like this:
+
+<img src="./pics/html_extraction_workflow.jpg" width="600">
+
+Give that a run and you should get a nice little summary of the Bill Q1 FY2026 earnings press release!
+
+## Conclusions and Next Steps
+
+You have now completed all of the activities for Module 2!  You have seen how to use HTTP Requests both as standalone nodes and as tools for AI agents.  You have also seen how to extract information from both PDF files and HTML webpages for analysis by an AI agent.  You are strongly encouraged to consult the n8n documentation regarding [HTTP Request credentials](https://docs.n8n.io/integrations/builtin/credentials/httprequest/#http-request-credentials).  9 times out of 10 when something is going wrong with an HTTP Request, it is due to misconfigured credentials.  Understanding how to set these up properly is key to success with n8n!
+
