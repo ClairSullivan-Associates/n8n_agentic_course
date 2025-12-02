@@ -80,5 +80,62 @@ Let's now look at what we have so far for our workflow:
 
 <img src="./pics/workflow1.jpg" width="600">
 
-As we can see above, we can quickly verify that the Split Out node is working correctly by executing it.  We can see that we started with 1 item being passed between each node, but by the final Split Out node we now have 8 separate items, one for each question-answer pair.
+As we can see above, we can quickly verify that the Split Out node is working correctly by executing it.  We can see that we started with 1 item being passed between each node, but by the final Split Out node we now have 8 separate items, one for each question-answer pair.  We can now connect this to our agent.
 
+### Connecting to the Agent
+
+As before, connect your AI Agent node to the Split Out node along with your chat model.  We want the agent to respond to the question provided in the `input` field of each item.  We can do this by setting the prompt to strictly be:
+
+```
+{{ $json.input }}
+```
+
+This is essentially mimicking how a human would ask a question to a chatbot, but in an automated fashion from our 8 individual questions (`input`).  If you run this node, it will take a moment as it turns through all 8 of the questions.  But you should see the output of the AI Agent node now has 8 items, each with the agent's response to the corresponding question.
+
+### Logging this Output Back to Braintrust for Evaluation
+
+If you read the Braintrust documentation you will discover that Braintrust has a very specific format for logging data for evaluation.  In particular, in order to log an experiment, Braintrust requires values for `input`, `output`, and `expected`.  However, these are attached to different nodes throughout our workflow, such as `{{ $('Split Out').item.json.input }}`.  So we want to make sure that they are renamed to the variable names that Braintrust   We will use another Edit Fields node to set the variable names and correct format as shown below:
+
+<img src="./pics/edit_fields2.jpg" width="300">
+
+Next, we need to know that Braintrust expects these values as a single list.  To create this list from our existing 8 items, we will use an Aggregate node where we combine all item data from the previous node into a single list.  Here is how to configure this node:
+
+<img src="./pics/aggregate.jpg" width="300">
+
+Notice that when you run this node, you have a nicely-formatted list and the output of the node is now back to a single item.
+
+### POSTing the Results to Braintrust
+
+We finally are ready to POST these results back to Braintrust as an experiment for evaluation.  We will use two more HTTP Request nodes to do this.  The first one will create the experiment and the second one will log the results to that experiment.  Here is how to configure the first HTTP Request node to create the experiment (note that the image is split into two parts for readability):
+
+<div style="display: flex; gap: 20px;">
+  <img src="./pics/create_exp1.jpg" width="300">
+  <img src="./pics/create_exp2.jpg" width="300">
+</div>
+
+
+Let's look talk about what is going on here.  Since this is a POST request, you need to send a body (the actual data) with the request.  This is configured as JSON, which is the standard format for APIs.  The body contains three parameters that define the new experiment:
+
+- `project_id`: The expression {{ $('HTTP Request').item.json.objects[0].project_id }} retrieves the project ID from the first HTTP Request node. This tells Braintrust which project the experiment belongs to.
+- `name`: This uses n8n_eval_{{ $now.format('yyyy-MM-dd_HH-mm-ss') }} to dynamically generate a unique experiment name.  It is generally good practice to provide a unique name and including a time stamp is a nice, quick way of knowing when the experiment was run.  The `$now` function gets the current timestamp and formats it as a date with time.  So each time this workflow runs, it creates a name like "n8n_eval_2025-12-02_14-54-28".  
+- `dataset_id`
+
+ At this point, if you go into the Experiments tab in Braintrust and run this node, you should see a new experiment created with the name you specified and current time stamp.
+
+ Now comes the final step of actually writing the results to this experiment.  Here is how to configure the final HTTP Request node to do this:
+
+<img src="./pics/upload_results_to_bt.jpg" width="400">
+
+Breaking this down, the POST method sends data to the Braintrust API.  Notice the URL is `https://api.braintrust.dev/v1/experiment/{{ $json.id }}/insert`, which uses the experiment ID from the previous request.  This tells Braintrust which experiment should receive the new data.
+
+Because we are using a POST request we know we need to send a JSON body with the request.  This is where things get interesting.  Here we are sending straight JSON with the "Using JSON" body specification and then we use `{{ JSON.stringify({ events: $('Aggregate').item.json.data }) }}` to create that content.  This is doing two things.  First, it's creating a JavaScript object structure with an "events" key that contains the data from the Aggregate node.  The expression `$('Aggregate').item.json.data` pulls the processed results from your AI agent output stored in the Aggregate node.  Second, `JSON.stringify()` is a critical function here.  It converts that JavaScript object into a properly formatted JSON string. Think of it this way: inside n8n, the data exists as a JavaScript object (which is flexible and mutable), but when you send it over HTTP to the API, it needs to be in JSON format (which is a text based string representation).
+
+Once you execute this node, you will see a series of unique identifiers returned, one for each of the 8 question-answer pairs that were logged to Braintrust.
+
+### Examining the Results in Braintrust
+
+Now that we have logged our experiment results to Braintrust, let's go back to the Braintrust dashboard and see how our AI agent performed.  Go to the Experiments tab and you should see the experiment you created earlier, likely labeled as "LATEST."  Click on it to see the details.  Here is what mine looked like:
+
+<img src="./pics/bt_logged_experiment.jpg" width="600">
+
+So we can see what the input question was (`Input`), what the output of the agent was (`Output`), and what the expected answer was (`Expected`).  Congratulations!  You have successfully logged your first experiment to Braintrust from n8n!
