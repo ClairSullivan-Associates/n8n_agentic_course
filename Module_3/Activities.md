@@ -134,7 +134,7 @@ Once you execute this node, you will see a series of unique identifiers returned
 
 So now we have a complete workflow that takes question-answer pairs from Braintrust, has our AI agent answer the questions, and then logs the results back to Braintrust for evaluation.  Here is what the complete workflow looks like:
 
-<img src="./pics/full_workflow.jpg" width="600">
+<img src="./pics/full_workflow.jpg" width="900">
 
 ### Examining the Results in Braintrust
 
@@ -143,3 +143,48 @@ Now that we have logged our experiment results to Braintrust, let's go back to t
 <img src="./pics/bt_logged_exp.jpg" width="600">
 
 So we can see what the input question was (`Input`), what the output of the agent was (`Output`), and what the expected answer was (`Expected`).  Congratulations!  You have successfully logged your first experiment to Braintrust from n8n!
+
+## Module 3, Activity 3: Scoring the Results with Braintrust
+
+While it is useful to look at the exact response of the agent to each question, as the number of question-answer pairs increases this is not always practical.  Additionally, it is useful to have an overall score for how well the agent performed for monitoring behavior over time or with specific changes to your workflow.  Braintrust provides a way to do this using their scoring feature.  Let's look at how to set this up.
+
+In Braintrust select "Scorers" and create a new scorer by clicking on the blue "+ Scorer" button.  
+
+<img src="./pics/bt_new_scorer.jpg" width="300">
+
+Let's give it the name of "accuracy_scorer".  We will be using the LLM as a judge and you will be able to choose from a variety of LLMs to handle the scoring.  For this example I will use GPT-5 mini.  Next, you need to provide a system prompt that can take the input, output, and expected values and return a score.  Here is an example of a simple prompt that does this:
+
+```
+Consider the following question:
+{{input}}
+
+and answer:
+{{output}}
+
+Does the answer satisfy the expected answer? {{expected}}
+
+a) It perfectly answers the question.
+b) It partially answers the question.
+c) It is completely wrong.
+```
+
+Notice that this scorer has 3 potential outcomes such that there is a non-binary scoring of the agent's response.  This is a useful choice to allow for partial credit, but you could also make this a binary correct/incorrect scorer if you wanted to.
+
+Finally, we need to assign what score to award to a, b, and c above.  I chose 1 for a, 0.5 for b, and 0 for c.  Here is what the completed scorer looks like:
+
+<img src="./pics/bt_completed_scorer.jpg" width="600">
+
+Save this scorer so we can run it on our experiment.
+
+### Running the Scorer on the Experiment
+
+Go back to the Experiments tab and select the experiment you created earlier.  From here, you will want to select all of the questions you want scored.  (Select all of them.)  Next, click the "% Score" button above the dataset to select a scorer to apply to these questions.  
+
+<img src="./pics/bt_assign_scorer.jpg" width="600">
+
+Select the "accuracy_scorer" that we just created and then click the blue "Apply scorers" button.  Braintrust will now process each of the selected questions through the scorer and return a score for each one.  At the top, it will give you the average accuracy score for the entire experiment.  Here is what the results look like after scoring:
+
+<img src="./pics/bt_scorer_results.jpg" width="600">
+
+We can see here that this agent achieved an average accuracy score of 100%.  This is not surprising given the very basic nature of this chatbot and the question-answer pairs we created.  In practice as you build more sophisticated agents and workflows, it is very unlikely that you will achieve a perfect score.  In fact, if you do, it is a sign that perhaps you dataset does not truly reflect the nature of what the agent will face in production.  You want to make sure that your dataset fully spans the space of all possible inputs the agent may encounter, especially including edge cases.  If you are using an agent in production, you want to include as many problematic user inputs as possible to monitor improvements over time.
+
