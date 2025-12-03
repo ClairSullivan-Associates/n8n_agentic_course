@@ -4,7 +4,9 @@
 #### Email: clair@clairsullivan.com
 ### Last modified: 2025-12-03
 
-This repository contains all the materials for the one day, hands-on course "Agentic AI with Orchestrated Workflows for Engineers," including lecture slides, activity instructions (ungraded), and challenge problems (graded).  The course will cover the following topics:
+This repository contains all the materials for the one day, hands-on course "Agentic AI with Orchestrated Workflows for Engineers," including lecture slides, activity instructions (ungraded), and challenge problems (graded).  It is recommended that you clone this repository to your local machine.
+
+The course will cover the following topics:
 
 - Introduction to Agentic AI (Module 0)
 - Foundational Agentic Patterns with n8n (Module 1)
