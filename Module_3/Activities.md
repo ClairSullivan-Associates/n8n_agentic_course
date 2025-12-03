@@ -116,8 +116,8 @@ We finally are ready to POST these results back to Braintrust as an experiment f
 
 Let's look talk about what is going on here.  Since this is a POST request, you need to send a body (the actual data) with the request.  This is configured as JSON, which is the standard format for APIs.  The body contains three parameters that define the new experiment:
 
-- `project_id`: The expression {{ $('HTTP Request').item.json.objects[0].project_id }} retrieves the project ID from the first HTTP Request node. This tells Braintrust which project the experiment belongs to.
-- `name`: This uses n8n_eval_{{ $now.format('yyyy-MM-dd_HH-mm-ss') }} to dynamically generate a unique experiment name.  It is generally good practice to provide a unique name and including a time stamp is a nice, quick way of knowing when the experiment was run.  The `$now` function gets the current timestamp and formats it as a date with time.  So each time this workflow runs, it creates a name like "n8n_eval_2025-12-02_14-54-28".  
+- `project_id`: The expression `{{ $('HTTP Request').item.json.objects[0].project_id }}` retrieves the project ID from the first HTTP Request node. This tells Braintrust which project the experiment belongs to.
+- `name`: This uses `n8n_eval_{{ $now.format('yyyy-MM-dd_HH-mm-ss') }}` to dynamically generate a unique experiment name.  It is generally good practice to provide a unique name and including a time stamp is a nice, quick way of knowing when the experiment was run.  The `$now` function gets the current timestamp and formats it as a date with time.  So each time this workflow runs, it creates a name like "n8n_eval_2025-12-02_14-54-28".  
 - `dataset_id`
 
  At this point, if you go into the Experiments tab in Braintrust and run this node, you should see a new experiment created with the name you specified and current time stamp.
