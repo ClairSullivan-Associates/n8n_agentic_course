@@ -188,3 +188,13 @@ Select the "accuracy_scorer" that we just created and then click the blue "Apply
 
 We can see here that this agent achieved an average accuracy score of 100%.  This is not surprising given the very basic nature of this chatbot and the question-answer pairs we created.  In practice as you build more sophisticated agents and workflows, it is very unlikely that you will achieve a perfect score.  In fact, if you do, it is a sign that perhaps you dataset does not truly reflect the nature of what the agent will face in production.  You want to make sure that your dataset fully spans the space of all possible inputs the agent may encounter, especially including edge cases.  If you are using an agent in production, you want to include as many problematic user inputs as possible to monitor improvements over time.
 
+## Conclusion and Next Steps
+
+Congratulations on completing Module 3!  You have successfully set up Braintrust, created an n8n workflow to log experiments to Braintrust, and created a scorer to evaluate the performance of your agent.  There are a few things to remember as you move forward into the challenges:
+
+- Make sure to create comprehensive datasets in Braintrust that fully reflect the range of inputs your agent may encounter.
+- Be sure your dataset includes edge cases and problematic inputs to truly test the robustness of your agent.
+- Whenever you make a change to your agent or workflow, _especially_ changes to prompts, be sure to log a new experiment to Braintrust to monitor how those changes impact performance.
+- When creating an LLM-as-a-judge scorer, you want to consider that your grading prompt is as important as your agent prompt.  It does no good to have a great agent if your scorer is not well-designed to accurately assess its performance!
+
+Braintrust is an incredibly powerful tool for evaluating LLM outputs and agent performance.  In this course we have only had time to scratch the surface of its capabilities.  However, even with this basic introduction, you should be well-equipped to begin using Braintrust to evaluate and improve your own agentic workflows in n8n.
