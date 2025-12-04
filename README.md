@@ -15,7 +15,7 @@ The course will cover the following topics:
 
 It is designed such that the learners are provided with a short lecture, then work through a series of activites to learn the material, and finally complete a series of challenges that will be scored as part of a team competition (scoring algorithm not part of this repo).
 
-The onboarding instructions for setting up n8n and Braintrust accounts can be found in the Module 0 `onboarding.md` document.
+The onboarding instructions for all accounts that will be needed for this workshop can be found in the Module 0 `onboarding.md` document.
 
 ### General Approach to the Course
 
