@@ -8,9 +8,7 @@ In order to achieve this, you will need to set up a variety of accounts and API 
 
 ## n8n Cloud
 
-In this course we will be working in the n8n Cloud environment.  You should have already received an email invitation to join the n8n Cloud platform.  
-
-**CONFIRM INSTRUCTIONS WITH BILL**
+In this course we will be working in the n8n Cloud environment.  You should have already received an email invitation to join the n8n Cloud platform.  Your assigned team will be working within an assigned project on the Bill n8n cloud environment.  It is recommended that you and your team create some organization within your project, such as each team member having their own folder for their individual activities.   
 
 ## Google Gemini
 
@@ -18,11 +16,17 @@ In this course we will be working in the n8n Cloud environment.  You should have
 
 ## Google Sheets
 
-There are various activities and challenges in this course that will require you to read from and write to Google Sheets.  In order to do this, you might need to provide the ID of the particular sheet you are working with.  To find the ID of a Google Sheet, open the sheet in your web browser.  The URL will look something like this:
+There are various activities and challenges in this course that will require you to read from and write to Google Sheets.  You will be connecting to the Google Sheets you create via OAuth2 authentication.  When you do this, you will be able to select the appropriate sheet from a list via a dropdown menu.
+
+However, it is also possible to connect to a Google Sheet via the ID of the particular sheet you are working with.  To find the ID of a Google Sheet, open the sheet in your web browser.  The URL will look something like this:
 
 ![](./pics/google_sheet_id.jpg)
 
 The ID is the string of characters shown above in the orange box between `.../d/` and `/edit?gid=...`.  
+
+## GitHub
+
+For some of the challenges in this course, you will be required to interact with GitHub repositories.  You will need to create a GitHub account if you do not already have one.  If you need to create an account, [sign up here](https://github.com/signup).  You will then be connecting to this account via OAuth2 authentication within n8n.
 
 ## Visual Crossing
 
