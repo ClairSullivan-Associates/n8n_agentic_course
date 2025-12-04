@@ -72,7 +72,7 @@ You also need to determine based on the content of the issue how much of a prior
 Once you have written your results to a Google Sheet, you will copy and paste the results into the scorer.
 
 **Hint:**
-It is recommended that you explore te GitHub integrations in n8n to help you with this workflow.  In particular, you are encouraged to read the documentation on [GitHub credentials](https://docs.n8n.io/integrations/builtin/credentials/github/) for this challenge.
+It is recommended that you explore te GitHub integrations in n8n to help you with this workflow.  In particular, you are encouraged to read the documentation on [GitHub credentials](https://docs.n8n.io/integrations/builtin/credentials/github/) for this challenge.  You will learn more about authentication in the next module, so it is likely easiest to get startued using OAuth2 authentication for this challenge.
 
 
 # Question 5
