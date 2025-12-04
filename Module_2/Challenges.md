@@ -11,6 +11,9 @@ There are practically limitless ways you can approach this problem.  For example
 **Important Note**
 You will use the following URL to access the API: `https://gateway.stage.bill.com/connect/v3/login` 
 
+**Another Important Note**
+For "reasons," be sure to include in your prompt that you will only be working with invoices that have an invoice number beginning with the string "FAKEINV."
+
 **Hint**
 Be sure to consult the [Bill.com v3 API documentation](https://developer.bill.com/reference/api-reference-overview) for more information on how to access the API and its endpoints.  In particular, you are encouraged to explore pagination for this API.
 
