@@ -118,6 +118,9 @@ Here, we are going to add a new line to the sheet every time we get a new chat. 
 
 <img src="./pics/append_happy.jpg" width="600">
 
+**Note:**
+It is also possible to select the Google Sheet by its ID rather than the drop down menu for Document.  The instructions on how to do the are shown in the Module 0 `onboarding.md` document.
+
 Now repeat this process for Output 1 of the Switch node, except this time set the Sentiment column to "unhappy."  
 
 At this point, you have two different append row nodes in your workflow.  While this might not be too confusing with only two of them, note that you can rename nodes in n8n to make it easier to identify them.  To do so, click into the node and double click on the name at the top.  Change the names of your two Google Sheets nodes to something unique so you can easily identify them.  Here is what the completed workflow should look like:
