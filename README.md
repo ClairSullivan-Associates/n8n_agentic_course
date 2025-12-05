@@ -2,7 +2,7 @@
 
 ### Written by: Clair J. Sullivan
 #### Email: clair@clairsullivan.com
-### Last modified: 2025-12-03
+### Last modified: 2025-12-05
 
 This repository contains all the materials for the one day, hands-on course "Agentic AI with Orchestrated Workflows for Engineers," including lecture slides, activity instructions (ungraded), and challenge problems (graded).  It is recommended that you clone this repository to your local machine.
 
