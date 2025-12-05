@@ -191,6 +191,18 @@ Search the tools for the Wikipedia tool, add it to your agent, and run it.  You 
 
 It is important to note that the agent knew to access the Wikipedia tool because we told it to do so in the prompt.  However, as you will see shortly, we will eventually need to add tool descriptions to inform the agent what the tool does so it knows which tool to use for the job.  
 
+### A Note on Output Format
+
+We are asking the agent to create the blog post in markdown format.  However, there are many situations where you might want to have a specific structured output from the agent.  In this case, you can tell the agent to "Require Specific Output Format" as shown here:
+
+<img src="./pics/require_output_format.jpg" width="300">
+
+When you do this, you will see that another node connection alled "Output Parser" is added to the agent node:
+
+<img src="./pics/agent_with_output_parser.jpg" width="300">
+
+If you click on this, you have the option to either output the results as a list of separate items or as structured JSON.  This might be helpful for you in one of the upcoming challenges!
+
 ### Outputting the Results
 
 We now want to write these results back to the sheet.  In this case, we will again create a Google Sheet node, but now we want to just update the rows, not append them.  So choose the approprate action and add the node to the output of the AI Agent.
