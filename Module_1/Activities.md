@@ -28,13 +28,17 @@ Credentials are stored in a separate location within n8n.  In order to find them
 
 <img src="./pics/cred1.jpg" width="600">
 
-From here, you will have a series of pre-staged, shared credentials, including that for Google Gemini.  You will select this credential for the agent in this activity.  
-
-However, let's say we want to create a credential for Google Sheets, which you will need to do a bit later in this module.  If you click on the drop down for "Create Workflow" in the upper right, you will see the option to "Create Credential."  
+From here, you will have your API key for Google Gemini.  If you have not already created this key, follow the directions found in the `onboarding.md` doc in Module 0 of this repository.  We want to add this credential to our n8n.  If you click on the drop down for "Create Workflow" in the upper right, you will see the option to "Create Credential."  
 
 <img src="./pics/cred2.jpg" width="600">
 
-From here you can search among the many available apps and services to create the credential.  In this case, let's pick "Google Sheets OAuth2 API."
+From here, you can search among the many available apps and services to create the credential.  Start typing "Google Gemini" and you will see the option for "Google Gemini (PaLM)":
+
+<img src="./pics/gemini_palm_api_cred.jpg" width="300">
+
+Select this and copy in the API key into the appropriate field.  You have now created your Google Gemini credential in n8n!
+
+However, let's say we want to create a credential for Google Sheets, which you will need to do a bit later in this module.  Again we will follow the above path to create a new credential.  In this case, let's pick "Google Sheets OAuth2 API."
 
 <img src="./pics/cred3.jpg" width="300">
 

@@ -12,7 +12,11 @@ In this course we will be working in the n8n Cloud environment that has been spe
 
 ## Google Gemini
 
-**CONFIRM INSTRUCTIONS WITH BILL**
+You will be accessing Google Gemini through a personal Google account, either created for this course or one that you already own.  In order to access Gemini, the LLM we will use for the majority of this course, through n8n, you will need to create credentials for it.  Go to [aistudio.google.com](https://aistudio.google.com/) and click "Get Started" in the upper right.  Once you have logged in with this Google account, click "Get API key" in the lower left.  Then click "Create API key" in the upper right.  You will then get a popup to create the key associated with a project that looks like this:
+
+<img src="./pics/create_gemini_api_key.jpg" width="300">
+
+You can choose to either create a project or use the default Gemini project.  Follow the remaining prompts on the screen to create your API key.  Once you have created the key, this will give you access to the free tier of Gemini, which gives you unlimited access to the Gemini 2.5 Flash model and limited daily access to the Gemini 2.5 Pro model.  Copy the key and save it somewhere safe, as you will need it later in the course.  
 
 ## Google Sheets
 
