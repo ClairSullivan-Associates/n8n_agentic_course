@@ -8,7 +8,7 @@ In order to achieve this, you will need to set up a variety of accounts and API 
 
 ## n8n Cloud
 
-In this course we will be working in the n8n Cloud environment.  You should have already received an email invitation to join the n8n Cloud platform.  Your assigned team will be working within an assigned project on the Bill n8n cloud environment.  It is recommended that you and your team create some organization within your project, such as each team member having their own folder for their individual activities.   
+In this course we will be working in the n8n Cloud environment.  You should have already received an email invitation to join the n8n Cloud platform.  Your assigned team will be working within an assigned project on the Bill n8n cloud environment.  It is recommended that you and your team create some organization within your project, such as each team member having their own folder for their individual activities.  Be sure that you store any shared credentials within this project so that all team members can access them.  
 
 ## Google Gemini
 
@@ -50,4 +50,6 @@ For some of the challenge problems you will be creating agentic workflows that i
 
 We will be using a sandbox environment in Braintrust to do automated evaluation of of our agentic workflows.  You should have already received an email invitation to join the Braintrust platform.  If you have not received this email, please let the instructor know.
 
-**CONFIRM INSTRUCTIONS WITH BILL** 
+In order to access Braintrust via n8n through the REST API, you will need to create an API key.  To get one, go into Braintrust and click on your avatar in the upper right and select "Settings" from the dropdown.  Then click on the "API Keys" tab on the left. 
+
+<img src="./pics/bt_api_key.jpg" width="300">
