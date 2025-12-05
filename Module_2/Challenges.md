@@ -49,9 +49,9 @@ Copy and paste the results of the Google Sheet into the scorer when you are comp
 
 # Data Extraction Instructions
 
-You will be working with the US Securities and Exchange Commission (SEC) API for this section of the module.  The SEC provides a public API that allows users to access filings made by publicly traded companies.  In order to access it, you will need to create a free account and obtain an API key.  You can find more information about the SEC API here: `https://sec-api.io/`.
+You will be working with the US Securities and Exchange Commission (SEC) API for this section of the module.  The SEC provides a public API that allows users to access filings made by publicly traded companies.  In order to access it, you will need to create a free account and obtain an API key, which you can do at [sec-api.io](https://sec-api.io/).  You can find more information about the SEC API here: [https://sec-api.io/](https://sec-api.io/docs).
 
-When working with this API, we will be downloading PDFs from the site.  These follow a particular format.  For example, to access the PDF of the September 30, 2025 Form 10-Q (Quarterly Earnings Report) for Bill Holdings, you will using the following URL:
+When working with this API, we will be downloading PDFs from the site.  These web links follow a particular format.  For example, to access the PDF of the September 30, 2025 Form 10-Q (Quarterly Earnings Report) for Bill Holdings, you will using the following URL:
 
 `https://www.sec.gov/Archives/edgar/data/1786352/000162828025050328/bill-20250930.htm`
 
