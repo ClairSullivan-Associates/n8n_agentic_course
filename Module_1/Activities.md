@@ -28,7 +28,7 @@ Credentials are stored in a separate location within n8n.  In order to find them
 
 <img src="./pics/cred1.jpg" width="600">
 
-From here, you will have your API key for Google Gemini.  If you have not already created this key, follow the directions found in the `onboarding.md` doc in Module 0 of this repository.  We want to add this credential to our n8n.  If you click on the drop down for "Create Workflow" in the upper right, you will see the option to "Create Credential."  
+Here is where we will create our credential for the Google Gemini with an API key.  If you have not already created this key, follow the directions found in the `onboarding.md` doc in Module 0 of this repository.  We want to add this credential to our n8n.  If you click on the drop down for "Create Workflow" in the upper right, you will see the option to "Create Credential."  
 
 <img src="./pics/cred2.jpg" width="600">
 
