@@ -25,4 +25,7 @@ For each module, you will begin by individually working through a series of ungr
 
 All team scoring will be handled through the workshop platform at [https://aiworkshop.dev.bill.com/](https://aiworkshop.dev.bill.com/)
 
+### Previous Course
+
+A previous course was run for Bill.com April-June, 2025 focusing on how to create basic GenAI applications on AWS with LangChain.  The repository for that course can be found [here](https://github.com/ClairSullivan-Associates/genai_foundations).
 
