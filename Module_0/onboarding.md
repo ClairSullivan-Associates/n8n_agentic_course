@@ -34,6 +34,8 @@ For some of the challenges in this course, you will be required to interact with
 
 In one of our activities we will be working with a free weather API from Visual Crossing.  You will need to go to [visualcrossing.com](https://www.visualcrossing.com/) and click "Sign Up" in the upper right corner.  You can create a free account using your email address.  Once you have created your account, you will need to obtain an API key.  To do this, click on the "Account" button in the upper right corner.  This will take you to your Account page where you will be able to see your API key.  Copy this key and save it somewhere safe, as you will need it later in the course.
 
+**Important:** Please create this API key using a personal email address and NOT your Bill.com email address!
+
 ## Bill.com API
 
 In Module 2 we will be creating agentic workflows that interact with the Bill.com v3 API.  In particular, some invoices have been pre-staged in a sandbox account for you to work with.  You will use the following credentials to access the Bill.com v3 API:
