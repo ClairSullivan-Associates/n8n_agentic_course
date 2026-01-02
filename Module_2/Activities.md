@@ -86,7 +86,9 @@ Once this is configured, you are now ready to run this basic chatbot.  Ask what 
 
 ###  Setting the Credentials Outside of Query Parameters
 
-As stated above, it is generally preferrable to set the credentials outside of the workflow itself in the credential manager.  So let's adjust the above workflow and do that.
+As stated above, it is generally preferrable to set the credentials outside of the workflow itself in the credential manager.  So let's adjust the above workflow and do that.  
+
+**Note:** You will be provided with the API key in class on the course webpage.  It is also available are a shared credential within n8n for this course.  However, you are encouraged to follow the below instructions to learn how to create a credential of your own.  **Please be sure if you are creating a credential to do it within your Personal workspace on n8n and not the Overview workspace.**
 
 Let's start by detaching that HTTP Request Tool from the workflow by hitting the trash icon on the arrow connecting the agent to the tool.  Next, create a new HTTP Request Tool and copy in the values for the description in URL from the original one.  
 
