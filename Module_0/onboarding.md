@@ -10,7 +10,7 @@ In order to achieve this, you will need to set up a variety of accounts and API 
 
 **Click [here](https://youtu.be/rWWxLD_Sfjo) for a short video overview for how to get started in n8n for this course.**
 
-In this course we will be working in the n8n Cloud environment that has been specifically created for this workshop: [https://billcom.app.n8n.cloud/](https://billcom.app.n8n.cloud/).  You should have already received an email invitation to join the n8n Cloud platform.  Your assigned team will be working within an assigned project on the Bill n8n cloud environment.  It is recommended that you and your team create some organization within your project, such as each team member having their own folder for their individual activities.  Be sure that you store any shared credentials within this project so that all team members can access them.  
+In this course we will be working in the n8n Cloud environment that has been specifically created for this workshop: [https://billworkshop.app.n8n.cloud](https://billworkshop.app.n8n.cloud).  You should have already received an email invitation to join the n8n Cloud platform.  Your assigned team will be working within an assigned project on the Bill n8n cloud environment.  It is recommended that you and your team create some organization within your project, such as each team member having their own folder for their individual activities.  Be sure that you store any shared credentials within this project so that all team members can access them.  
 
 ## Google Gemini
 
@@ -54,7 +54,7 @@ For some of the challenge problems you will be creating agentic workflows that i
 
 ## Braintrust
 
-**Click [here](https://youtu.be/P6pEW-TxE0k) for a short video overview for how to get started in Braintrust for this course.**
+**Click [here](https://youtu.be/P6pEW-TxE0k) for a short video overview for how to get started in Braintrust for this course.**  The following is a summary of this video.
 
 We will be using a sandbox environment in Braintrust to do automated evaluation of of our agentic workflow:s: [https://www.braintrust.dev/app/BILLWORKSHOP/](https://www.braintrust.dev/app/BILLWORKSHOP/).  You should have already received an email invitation to join the Braintrust platform.  If you have not received this email, please let the instructor know.
 
