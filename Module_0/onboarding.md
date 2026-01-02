@@ -1,5 +1,7 @@
 # Welcome to Agentic AI with Orchestrated Workflows for Engineers!
 
+**Note: It is strongly recommended that you clone this repository to your local machine to have easy access to all the materials for this course.**
+
 We are very excited to have you as part of this course!  
 
 In this course we will be doing a great deal of hands-on work with both the n8n orchestration platform as well as various AI models and APIs.  You will learn how to create agentic workflows that can perform complex tasks with minimal human intervention.  By the end of this course, you will have the skills and knowledge to build your own agentic AI solutions for a variety of applications.
