@@ -48,6 +48,8 @@ In Module 2 we will be creating agentic workflows that interact with the Bill.co
 
 For some of the challenge problems you will be creating agentic workflows that interact with the SEC EDGAR API to retrieve company filings.  In order to do this, you will need to create an API key to their database, which you can do at [sec-api.io](https://sec-api.io/).  
 
+**Important:** Please create this API key using a personal email address and NOT your Bill.com email address!
+
 ## Braintrust
 
 **Click [here](https://youtu.be/P6pEW-TxE0k) for a short video overview for how to get started in Braintrust for this course.**  The following is a summary of this video.
