@@ -217,7 +217,7 @@ We will be experimenting in this activity with one of those templates.  Search t
 
 <img src="./pics/rag_template.jpg" width="600">
 
-Note that this particular template uses OpenAI embeddings while we have been primarily using Google Gemini.  This is OK.  Click on that node and you will see that you can can claim 100 free OpenAI API credits.  
+Note that this particular template uses OpenAI embeddings while we have been primarily using Google Gemini.  This is OK.  Click on that node and select the "Global Openai Credentials" for use in this node.  
 
 ### Exploring the RAG Chatbot
 
