@@ -8,6 +8,8 @@ In order to achieve this, you will need to set up a variety of accounts and API 
 
 ## n8n Cloud
 
+**Click [here](https://youtu.be/rWWxLD_Sfjo) for a short video overview for how to get started in n8n for this course.**
+
 In this course we will be working in the n8n Cloud environment that has been specifically created for this workshop: [https://billcom.app.n8n.cloud/](https://billcom.app.n8n.cloud/).  You should have already received an email invitation to join the n8n Cloud platform.  Your assigned team will be working within an assigned project on the Bill n8n cloud environment.  It is recommended that you and your team create some organization within your project, such as each team member having their own folder for their individual activities.  Be sure that you store any shared credentials within this project so that all team members can access them.  
 
 ## Google Gemini
@@ -51,6 +53,8 @@ In Module 2 we will be creating agentic workflows that interact with the Bill.co
 For some of the challenge problems you will be creating agentic workflows that interact with the SEC EDGAR API to retrieve company filings.  In order to do this, you will need to create an API key to their database, which you can do at [sec-api.io](https://sec-api.io/).  
 
 ## Braintrust
+
+**Click [here](https://youtu.be/P6pEW-TxE0k) for a short video overview for how to get started in Braintrust for this course.**
 
 We will be using a sandbox environment in Braintrust to do automated evaluation of of our agentic workflow:s: [https://www.braintrust.dev/app/BILLWORKSHOP/](https://www.braintrust.dev/app/BILLWORKSHOP/).  You should have already received an email invitation to join the Braintrust platform.  If you have not received this email, please let the instructor know.
 
