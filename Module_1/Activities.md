@@ -24,25 +24,13 @@ Notice that there is a red asterisk below the AI Agent node next to "Chat Model.
 
 ### Working with and Adding Credentials
 
-Credentials are stored in a separate location within n8n.  In order to find them, you will go to your n8n launch page and select "Credentials," as shown here:
+Credentials are stored in a separate location within n8n.  In order to find them, you will go to your n8n launch page under either the Overview page or the Personal page and select "Credentials," as shown here:
 
 <img src="./pics/cred1.jpg" width="600">
 
-Here is where we will create our credential for the Google Gemini with an API key.  If you have not already created this key, follow the directions found in the `onboarding.md` doc in Module 0 of this repository.  We want to add this credential to our n8n.  If you click on the drop down for "Create Workflow" in the upper right, you will see the option to "Create Credential."  
+If you look in the Overview page, you will see a series of shared credentials that have been created for you to use in this course, such as the Global Gemini Credentials and the Global Openai Credentials.  Should you wish to create your own credentials, **go into your Personal workspace on n8n** and add the credential there.  This will ensure that the credential is private to you and not shared with anyone else.  If you have already created the instructions in `Module_0/onboarding.md` for setting up the Braintrust API key, you will have seen this process at work already.
 
-<img src="./pics/cred2.jpg" width="600">
-
-From here, you can search among the many available apps and services to create the credential.  Start typing "Google Gemini" and you will see the option for "Google Gemini (PaLM)":
-
-<img src="./pics/gemini_palm_api_cred.jpg" width="300">
-
-Select this and copy in the API key into the appropriate field.  You have now created your Google Gemini credential in n8n!
-
-However, let's say we want to create a credential for Google Sheets, which you will need to do a bit later in this module.  Again we will follow the above path to create a new credential.  In this case, let's pick "Google Sheets OAuth2 API."
-
-<img src="./pics/cred3.jpg" width="300">
-
-You will then authenticate to your Google account via OAuth, which will then automatically populate the remainder of what you need for this credential to be used in n8n.
+You will learn more about creatinga and using credentials in Module 2.
 
 ### Saving Your Work
 
