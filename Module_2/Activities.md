@@ -169,7 +169,7 @@ Remember in the previous login step we sent the authenthication in the body? The
 
 As for `sessionId`, we cannot set it this way since it is dynamically created.  So we do need to manually provide it in the node as a header parameter.  However, rememver that it was determined earlier in the workflow by the first HTTP request node.  So we can use the value `{{ $json.sessionId }}` (just drag it from the input variable list on the left panel) to bring it in.  So you configuration for this HTTP Request tool should look like this:
 
-<img src="./pics/custom_auth2.jpg" width="400">
+<img src="./pics/bill_get_request.jpg" width="400">
 
 and your complete workflow should look like this:
 
