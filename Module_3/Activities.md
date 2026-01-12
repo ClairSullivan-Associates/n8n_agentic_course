@@ -34,6 +34,8 @@ Notice that after you have created a few question-answer pairs, Braintrust will 
 
 <img src="./pics/bt_loop_qa_pairs.jpg" width="300">
 
+**Note:** Loop will provide you with several options for which LLM to use to generate these question-answer pairs.  For this course, please select one of the OpenAI models (i.e. one of the ChatGPT options) as the model to use.
+
 Do this now to create a total of 8 question-answer pairs in your dataset.  You will need to click the orange "Confirm" button in the lower right to generate them and then the blue "Accept" button once you have had a chance to review them before adding them to your dataset.  You can always edit any of them later if you want to change them.
 
 You now have enough set up in Braintrust to connect it to n8n and get evaluating!
